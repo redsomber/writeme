@@ -4,7 +4,7 @@ export interface Rating {
 }
 
 export interface SessionData {
-  userID: string
+  userID: number
   text: string
   need: number
   entry: number

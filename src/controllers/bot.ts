@@ -3,7 +3,6 @@ import { MyContext, MyConversation } from '@/helpers/botLoad'
 import { Rating } from '@/helpers/interfaces'
 import { addMenu, editMenu } from '@/menus/menus'
 import { messageModel } from '@/models/Message'
-import { storageRAM } from '@/helpers/session'
 
 const ratingDB: Rating[] = [
   { id: '1', name: '1' },
@@ -17,16 +16,16 @@ export async function addPost(conversation: MyConversation, ctx: MyContext) {
   try {
     await ctx.reply('Write me your idea!')
     const { message } = await conversation.waitFor(':text')
-
-    if (!message?.text || !message?.from?.username) {
+    if (!message?.text) {
       return console.log('Empty message')
     }
-
-    storageRAM.readAll()[0].text = message.text
-    storageRAM.readAll()[0].userID = message.from.username
-    await ctx.reply(`Your post is "${message.text}"`, {
+    conversation.session.text = message?.text
+    conversation.session.userID = message.from.id
+    await ctx.reply(`Your post is "${message?.text}"`, {
       reply_markup: addMenu,
     })
+
+    return ctx.session
   } catch (error) {
     console.error(error)
   }
@@ -34,12 +33,12 @@ export async function addPost(conversation: MyConversation, ctx: MyContext) {
 
 export async function showTop3(ctx: MyContext) {
   try {
-    if (!ctx.message?.from?.username) {
+    if (!ctx.message?.from?.id) {
       return console.log('Empty user')
     }
 
     const db = await messageModel
-      .find({ userID: ctx.message?.from.username })
+      .find({ userID: ctx.message?.from.id })
       .sort({ score: -1 })
       .limit(3)
 
@@ -62,12 +61,12 @@ export async function showTop3(ctx: MyContext) {
 
 export async function editPost(ctx: MyContext) {
   try {
-    if (!ctx.message?.from?.username) {
+    if (!ctx.message?.from?.id) {
       return console.log('Empty user')
     }
 
     const db = await messageModel
-      .find({ userID: ctx.message.from.username })
+      .find({ userID: ctx.message.from.id })
       .sort({ score: -1 })
     for (let i = 0; i < db.length; i++) {
       const text = `${db[i].text}\nScore: ${db[i].score}`

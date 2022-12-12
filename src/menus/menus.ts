@@ -8,6 +8,8 @@ addMenu.dynamic(() => {
   const range = new MenuRange<MyContext>()
   range
     .submenu({ text: 'Add', payload: 'rate' }, 'rate', async (ctx) => {
+      console.log(ctx.session)
+
       await ctx.editMessageText(`Add NECST rating for "${ctx.session.text}"?`)
     })
     .text('Delete', async (ctx) => {
@@ -23,20 +25,20 @@ editMenu.dynamic(() => {
   range
     .submenu({ text: 'Edit rating', payload: 'rate' }, 'rate', async (ctx) => {
       const text = ctx.callbackQuery.message?.text?.split('\n')
-      if (!text || !ctx.callbackQuery.from.username) {
+      if (!text || !ctx.callbackQuery.from.id) {
         return console.log('not found data in "edit"')
       }
       ctx.session.text = text[0]
-      ctx.session.userID = ctx.callbackQuery.from.username
+      ctx.session.userID = ctx.callbackQuery.from.id
       await ctx.editMessageText(`Edit NECST rating for "${ctx.session.text}"?`)
     })
     .text('Delete', async (ctx) => {
       const text = ctx.callbackQuery.message?.text?.split('\n')
-      if (!text || !ctx.callbackQuery.from.username) {
+      if (!text || !ctx.callbackQuery.from.id) {
         return console.log('not found data in "edit"')
       }
       ctx.session.text = text[0]
-      ctx.session.userID = ctx.callbackQuery.from.username
+      ctx.session.userID = ctx.callbackQuery.from.id
       await messageModel.deleteOne({
         userID: ctx.session.userID,
         text: ctx.session.text,
@@ -151,7 +153,7 @@ endRate.dynamic(async (ctx) => {
       Need: ${ctx.session.need}
       Entry: ${ctx.session.entry}
       Control: ${ctx.session.control}
-      Score: ${ctx.session.scale}
+      Scale: ${ctx.session.scale}
       Time: ${ctx.session.time}
       Score: ${ctx.session.score}
       `)

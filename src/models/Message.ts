@@ -5,7 +5,7 @@ import { getModelForClass, modelOptions, prop } from '@typegoose/typegoose'
 })
 export class Message {
   @prop({ required: true, index: true })
-  userID!: string
+  userID!: number
   @prop({ required: true })
   text!: string
   @prop()

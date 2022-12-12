@@ -1,12 +1,15 @@
-import { MemorySessionStorage, session } from 'grammy'
+import { FileAdapter } from '@grammyjs/storage-file'
 import { SessionData } from '@/helpers/interfaces'
+import { session } from 'grammy'
 
-export const storageRAM = new MemorySessionStorage<SessionData>()
+const storage = new FileAdapter<SessionData>({
+  dirName: 'sessions',
+})
 
 export default session({
   initial(): SessionData {
     return {
-      userID: '',
+      userID: 0,
       text: '',
       need: 0,
       entry: 0,
@@ -16,5 +19,5 @@ export default session({
       score: 0,
     }
   },
-  storage: storageRAM,
+  storage: storage,
 })

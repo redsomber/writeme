@@ -935,6 +935,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@grammyjs/storage-file@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@grammyjs/storage-file@npm:2.0.0"
+  checksum: 26ffe7c354bb0cbeda4d0965d0aa1de14dbc887ac7fc2d9c4c5efa8da5e91003f351cb2d00de65274d0e5ddcf88e68005a6171050fa3666db5700d63f26026b6
+  languageName: node
+  linkType: hard
+
 "@grammyjs/types@npm:^2.10.0":
   version: 2.10.2
   resolution: "@grammyjs/types@npm:2.10.2"
@@ -2278,6 +2285,7 @@ __metadata:
     "@grammyjs/conversations": ^1.1.0
     "@grammyjs/menu": ^1.1.2
     "@grammyjs/runner": ^1.0.4
+    "@grammyjs/storage-file": ^2.0.0
     "@typegoose/typegoose": ^9.13.2
     "@types/node": ^18.11.11
     "@typescript-eslint/eslint-plugin": ^5.45.1
