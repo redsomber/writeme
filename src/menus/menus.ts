@@ -1,5 +1,5 @@
 import { Menu, MenuRange } from '@grammyjs/menu'
-import { MyContext } from '@/helpers/botLoad'
+import { MyContext } from '@/helpers/bot'
 import { createNECSTmenu, createRateMenu } from '@/controllers/bot'
 import { messageModel } from '@/models/Message'
 

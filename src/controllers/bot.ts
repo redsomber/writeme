@@ -1,5 +1,5 @@
 import { MenuRange } from '@grammyjs/menu'
-import { MyContext, MyConversation } from '@/helpers/botLoad'
+import { MyContext, MyConversation } from '@/helpers/bot'
 import { Rating } from '@/helpers/interfaces'
 import { addMenu, editMenu } from '@/menus/menus'
 import { messageModel } from '@/models/Message'

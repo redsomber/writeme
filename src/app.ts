@@ -15,7 +15,7 @@ import {
 import { addPost, editPost, showTop3 } from '@/controllers/bot'
 import { conversations, createConversation } from '@grammyjs/conversations'
 import { run } from '@grammyjs/runner'
-import bot from '@/helpers/botLoad'
+import bot from '@/helpers/bot'
 import customSession from '@/helpers/session'
 import runMongo from '@/helpers/mongo'
 
